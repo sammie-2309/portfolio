@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sammie Nguyen   Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══ TOKENS ═══ */
+:root {
+  --color-bg-page:        #F5F2EA;
+  --color-bg-surface:     #FFFFFF;
+  --color-bg-surface-2:   #EDEAE0;
+  --color-bg-hover:       #D1CCC0;
+  --color-ink:            #1A1A1A;
+  --color-ink-secondary:  rgba(26,26,26,0.72);
+  --color-ink-tertiary:   rgba(26,26,26,0.50);
+  --color-border:         #1A1A1A;
+  --color-border-subtle:  rgba(26,26,26,0.15);
+  --color-shadow:         #1A1A1A;
+  --color-brand-blue:     #004BEF;
+  --color-brand-blue-hover: #003ACC;
+  --color-brand-blue-muted: #C5D6FF;
+  --color-brand-blue-subtle: #EEF3FF;
+  --color-brand-yellow:   #FFA801;
+  --color-accent-cyan:    #5BE0FF;
+  --color-tag-bg:         #1A1A1A;
+  --color-tag-text:       #F5F2EA;
+  --color-btn-bg:         #1A1A1A;
+  --color-btn-text:       #F5F2EA;
+  --color-nav-bg:         #F5F2EA;
+  --color-divider:        #1A1A1A;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-ui:      'Bricolage Grotesque', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --shadow-1: 4px 4px 0 var(--color-shadow);
+  --shadow-2: 5px 5px 0 var(--color-shadow);
+  --shadow-3: 7px 7px 0 var(--color-shadow);
+  --shadow-hover: 8px 8px 0 var(--color-shadow);
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 10px; --radius-xl: 16px; --radius-full: 999px;
+  --border-width: 2px;
+}
+
+[data-theme="dark"] {
+  --color-bg-page:        #111110;
+  --color-bg-surface:     #1A1918;
+  --color-bg-surface-2:   #222120;
+  --color-bg-hover:       #333030;
+  --color-ink:            #E8E4DC;
+  --color-ink-secondary:  rgba(232,228,220,0.78);
+  --color-ink-tertiary:   rgba(232,228,220,0.55);
+  --color-border:         rgba(232,228,220,0.85);
+  --color-border-subtle:  rgba(255,255,255,0.12);
+  --color-shadow:         rgba(232,228,220,0.7);
+  --color-tag-bg:         #E8E4DC;
+  --color-tag-text:       #111110;
+  --color-btn-bg:         #FFFFFF;
+  --color-btn-text:       #111110;
+  --color-nav-bg:         #111110;
+  --color-divider:        rgba(232,228,220,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-bg-page);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s, color 0.25s;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ═══ NAV ═══ */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--color-nav-bg);
+  border-bottom: var(--border-width) solid var(--color-border);
+  padding: 0 clamp(16px, 4vw, 48px);
+  display: flex; align-items: center;
+  height: 58px;
+  transition: background 0.25s, border-color 0.25s;
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 20px; letter-spacing: 0.08em;
+  color: var(--color-ink);
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  margin-right: 24px;
+  flex-shrink: 0;
+}
+.logo-mark {
+  width: 28px; height: 28px;
+  background: var(--color-brand-blue);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark svg { width: 14px; height: 14px; }
+.nav-links { display: flex; gap: 2px; }
+.nav-link {
+  padding: 4px 12px; border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 500;
+  color: var(--color-ink-secondary);
+  cursor: pointer; border: none; background: none;
+  text-decoration: none; transition: all 0.14s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+.nav-link:hover { background: rgba(128,128,128,0.1); color: var(--color-ink); }
+.nav-link.active { color: var(--color-ink); border: 1px solid var(--color-border-subtle); background: var(--color-bg-surface); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.nav-mono {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; color: var(--color-ink-tertiary); text-transform: uppercase;
+}
+.theme-toggle {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  background: var(--color-btn-bg); color: var(--color-btn-text);
+  border: none; border-radius: var(--radius-lg);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.12s;
+}
+.theme-toggle:hover { box-shadow: var(--shadow-2); transform: translate(-1px,-1px); }
+.toggle-pip {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1.5px solid currentColor; background: var(--color-bg-page);
+  flex-shrink: 0; transition: background 0.25s;
+}
+@media (max-width: 600px) {
+  .nav-mono { display: none; }
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: flex !important; }
+}
+.mobile-menu-btn {
+  display: none; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  background: none; border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md); cursor: pointer; color: var(--color-ink);
+}
+.mobile-nav {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: var(--color-bg-page);
+  flex-direction: column; align-items: flex-start;
+  padding: 24px;
+  gap: 8px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 24px; }
+.mobile-nav a { font-family: var(--font-display); font-size: 48px; letter-spacing: 0.04em; color: var(--color-ink); }
+
+/* ═══ PAGE WRAPPER ═══ */
+.page { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); }
+
+/* ═══ PAGES ═══ */
+.page-view { display: none; }
+.page-view.active { display: block; }
+
+/* ═══ HOME   HERO ═══ */
+.hero {
+  border-bottom: var(--border-width) solid var(--color-border);
+  padding: clamp(40px,8vw,100px) 0 clamp(40px,6vw,80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 10vw, 120px);
+  line-height: 0.88; letter-spacing: 0.01em;
+  color: var(--color-ink);
+  margin-bottom: 24px;
+  white-space: nowrap;
+}
+.hero h1 em { color: var(--color-brand-blue); font-style: normal; }
+.hero-sub {
+  font-size: clamp(15px,1.5vw,17px); color: var(--color-ink-secondary);
+  max-width: 520px; line-height: 1.72;
+  margin: 0 auto 32px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px;
+  font-family: var(--font-ui); font-weight: 700; font-size: 14px;
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  cursor: pointer; transition: all 0.13s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--color-btn-bg); color: var(--color-btn-text); box-shadow: var(--shadow-2); }
+.btn-primary:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-hover); }
+.btn-secondary { background: var(--color-bg-surface); color: var(--color-ink); box-shadow: var(--shadow-1); }
+.btn-secondary:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-3); }
+.btn-blue { background: var(--color-brand-blue); color: #fff; border-color: var(--color-brand-blue); box-shadow: var(--shadow-2); }
+.btn-blue:hover { background: var(--color-brand-blue-hover); transform: translate(-2px,-2px); box-shadow: var(--shadow-hover); }
+.btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.hero-kicker {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--color-brand-blue);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-bottom: 20px;
+}
+.hero-kicker::before { content: ''; width: 24px; height: 2px; background: var(--color-brand-blue); }
+.hero-kicker::after  { content: ''; width: 24px; height: 2px; background: var(--color-brand-blue); }
+.hero-badge {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 12px 20px;
+  box-shadow: var(--shadow-2);
+  text-align: right;
+}
+.hero-badge .num {
+  font-family: var(--font-display); font-size: 40px;
+  color: var(--color-ink); line-height: 1;
+  display: block;
+}
+.hero-badge .lbl {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--color-ink-tertiary); letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hero-badge.blue { background: var(--color-brand-blue); border-color: var(--color-brand-blue); }
+.hero-badge.blue .num, .hero-badge.blue .lbl { color: #fff; }
+.hero-avail {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+.avail-dot { width: 8px; height: 8px; border-radius: 50%; background: #10B981; flex-shrink: 0; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.3)} }
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+  .hero-badge { text-align: left; }
+}
+
+/* ═══ MARQUEE ═══ */
+.marquee-section {
+  border-bottom: var(--border-width) solid var(--color-border);
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-label {
+  position: absolute; left: clamp(16px,4vw,48px); top: 50%; transform: translateY(-50%);
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-ink-tertiary);
+  z-index: 2;
+  white-space: nowrap;
+}
+.marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; gap: 0; }
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item {
+  display: flex; align-items: center; justify-content: center;
+  padding: 8px 48px;
+  border-right: var(--border-width) solid var(--color-border-subtle);
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+  opacity: 0.65;
+}
+.marquee-item:hover { opacity: 1; }
+.marquee-item svg { height: 28px; width: auto; }
+/* Recolor logos for dark mode */
+[data-theme="dark"] .marquee-item svg path { fill: var(--color-ink); }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-fade-l, .marquee-fade-r {
+  position: absolute; top: 0; bottom: 0; width: 120px; pointer-events: none; z-index: 1;
+}
+.marquee-fade-l { left: 0; background: linear-gradient(to right, var(--color-bg-page) 40%, transparent); }
+.marquee-fade-r { right: 0; background: linear-gradient(to left, var(--color-bg-page) 40%, transparent); }
+
+/* ═══ SECTION HEAD ═══ */
+.sec-wrap { padding: clamp(40px,6vw,80px) 0; border-bottom: var(--border-width) solid var(--color-border); }
+.sec-wrap:last-child { border-bottom: none; }
+.sec-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 40px; padding-bottom: 20px;
+  border-bottom: var(--border-width) solid var(--color-border);
+  gap: 24px; flex-wrap: wrap;
+}
+.sec-kicker {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--color-ink-tertiary);
+  margin-bottom: 4px;
+}
+.sec-title {
+  font-family: var(--font-display); font-size: clamp(32px,4vw,52px);
+  letter-spacing: 0.02em; color: var(--color-ink); line-height: 1;
+}
+.sec-action { margin-left: auto; flex-shrink: 0; }
+
+/* ═══ PROJECT CARDS ═══ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  overflow: visible;
+  padding: 8px;
+  margin: -8px;
+}
+@media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 600px) { .projects-grid { grid-template-columns: 1fr; } }
+
+.proj-card {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2);
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  display: flex; flex-direction: column;
+}
+.proj-card:hover .proj-thumb-inner { transform: scale(1.06); }
+.proj-card:hover .proj-arrow { background: var(--color-btn-bg); color: var(--color-btn-text); }
+.proj-card:hover .proj-title { color: var(--color-brand-blue); }
+
+.proj-thumb {
+  height: 200px; overflow: hidden;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+  position: relative;
+}
+.proj-thumb-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.4s ease;
+  position: relative;
+}
+.proj-thumb-tags {
+  position: absolute; bottom: 10px; left: 10px;
+  display: flex; gap: 6px; flex-wrap: wrap; z-index: 2;
+}
+.proj-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.proj-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.proj-tag {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.09em;
+  text-transform: uppercase; padding: 3px 8px;
+  background: var(--color-tag-bg); color: var(--color-tag-text);
+  border-radius: var(--radius-sm);
+}
+.proj-tag.blue { background: var(--color-brand-blue-subtle); color: var(--color-brand-blue); border: 1px solid var(--color-brand-blue-muted); }
+.proj-tag.yellow { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+[data-theme="dark"] .proj-tag.blue { background: rgba(0,75,239,0.2); border-color: rgba(0,75,239,0.4); }
+[data-theme="dark"] .proj-tag.yellow { background: rgba(255,168,1,0.15); color: #FFA801; border-color: rgba(255,168,1,0.3); }
+.proj-title {
+  font-family: var(--font-ui); font-weight: 800; font-size: 18px;
+  color: var(--color-ink); line-height: 1.2; margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.proj-meta { display: flex; flex-direction: column; gap: 4px; flex: 1; margin-bottom: 16px; }
+.proj-meta-row { display: flex; gap: 0px; align-items: baseline; }
+.proj-meta-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-ink-tertiary);
+  flex-shrink: 0; width: 48px;
+}
+.proj-meta-value {
+  font-size: 16px; color: var(--color-ink-secondary); line-height: 1.55;
+}
+.proj-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 14px; border-top: 1px solid var(--color-border-subtle);
+}
+.proj-year { font-family: var(--font-mono); font-size: 10px; color: var(--color-ink-tertiary); letter-spacing: 0.08em; }
+.proj-arrow {
+  width: 32px; height: 32px; border-radius: var(--radius-md);
+  background: var(--color-bg-surface-2); border: 1px solid var(--color-border-subtle);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.proj-card:hover .proj-arrow { background: var(--color-btn-bg); color: var(--color-btn-text); }
+.proj-arrow svg { width: 14px; height: 14px; }
+
+/* Thumb color palettes */
+.t1 { background: linear-gradient(135deg, #EEF3FF 0%, #C5D6FF 100%); }
+.t2 { background: linear-gradient(135deg, #FFFBEB 0%, #FDE68A 100%); }
+.t3 { background: linear-gradient(135deg, #ECFEFF 0%, #A5F3FC 100%); }
+.t4 { background: linear-gradient(135deg, #F0FDF4 0%, #BBF7D0 100%); }
+.t5 { background: linear-gradient(135deg, #FFF1F2 0%, #FECDD3 100%); }
+.t6 { background: linear-gradient(135deg, #F5F3FF 0%, #DDD6FE 100%); }
+[data-theme="dark"] .t1 { background: linear-gradient(135deg, #001245 0%, #002680 100%); }
+[data-theme="dark"] .t2 { background: linear-gradient(135deg, #3D2600 0%, #7A4F00 100%); }
+[data-theme="dark"] .t3 { background: linear-gradient(135deg, #00303D 0%, #005F7A 100%); }
+[data-theme="dark"] .t4 { background: linear-gradient(135deg, #003D1F 0%, #006B38 100%); }
+[data-theme="dark"] .t5 { background: linear-gradient(135deg, #3D0010 0%, #7A0020 100%); }
+[data-theme="dark"] .t6 { background: linear-gradient(135deg, #1E0045 0%, #3D0080 100%); }
+
+/* ═══ TESTIMONIALS ═══ */
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+  overflow: visible; padding: 8px; margin: -8px;
+}
+@media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+.testi-card {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-2);
+  display: flex; flex-direction: column; gap: 20px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+.testi-card:hover, .work-card:hover, .proj-card:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-3); }
+.testi-card.featured { background: var(--color-brand-blue); border-color: var(--color-brand-blue); grid-column: span 1; }
+.testi-quote {
+  font-family: var(--font-ui); font-size: 16px; font-weight: 400;
+  color: var(--color-ink-secondary); line-height: 1.7;
+  position: relative;
+}
+.testi-card.featured .testi-quote { color: rgba(255,255,255,0.85); }
+.testi-quote::before {
+  content: '"';
+  font-family: var(--font-display); font-size: 60px; line-height: 0.8;
+  color: var(--color-brand-blue); display: block; margin-bottom: 8px;
+}
+.testi-card.featured .testi-quote::before { color: rgba(255,255,255,0.4); }
+.testi-author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: var(--border-width) solid var(--color-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 18px;
+  background: var(--color-bg-surface-2); color: var(--color-ink);
+  flex-shrink: 0;
+}
+.testi-card.featured .testi-avatar { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.3); }
+.testi-name { font-family: var(--font-ui); font-weight: 700; font-size: 14px; color: var(--color-ink); }
+.testi-card.featured .testi-name { color: #fff; }
+.testi-role { font-family: var(--font-mono); font-size: 10px; color: var(--color-ink-tertiary); letter-spacing: 0.08em; text-transform: uppercase; }
+.testi-card.featured .testi-role { color: rgba(255,255,255,0.6); }
+
+/* ═══ CV SECTION ═══ */
+.cv-section {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: clamp(20px,3vw,40px) 0;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 40px; align-items: center;
+  position: relative; overflow: hidden;
+  box-shadow: none;
+}
+@media (max-width: 640px) { .cv-section { grid-template-columns: 1fr; } }
+.cv-bg-text {
+  position: absolute; bottom: -20px; right: -10px;
+  font-family: var(--font-display); font-size: 200px; line-height: 1;
+  color: rgba(0,0,0,0.04); pointer-events: none; user-select: none;
+  letter-spacing: 0.02em;
+}
+[data-theme="dark"] .cv-bg-text { color: rgba(255,255,255,0.04); }
+.cv-kicker {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--color-ink-tertiary);
+  margin-bottom: 12px;
+}
+.cv-title {
+  font-family: var(--font-display); font-size: clamp(36px,5vw,72px);
+  color: var(--color-ink); line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+.cv-title em { color: var(--color-brand-blue); font-style: normal; }
+.cv-desc { font-size: 15px; color: var(--color-ink-secondary); line-height: 1.7; max-width: 440px; }
+.cv-actions { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; z-index: 1; }
+@media (max-width: 640px) { .cv-actions { align-items: flex-start; } }
+.btn-cv-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px;
+  background: var(--color-btn-bg); color: var(--color-btn-text);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-ui); font-weight: 800; font-size: 15px;
+  cursor: pointer; transition: all 0.13s;
+  box-shadow: var(--shadow-2);
+  white-space: nowrap;
+}
+.btn-cv-primary:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-hover); }
+.btn-cv-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  background: transparent; color: var(--color-ink-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.13s;
+  white-space: nowrap;
+}
+.btn-cv-secondary:hover { background: var(--color-bg-surface-2); color: var(--color-ink); }
+.btn-cv-primary svg, .btn-cv-secondary svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* ═══ WORK PAGE ═══ */
+.work-hero {
+  padding: 60px 0 48px;
+  border-bottom: var(--border-width) solid var(--color-border);
+  margin-bottom: 48px;
+}
+.work-hero h1 {
+  font-family: var(--font-display); font-size: clamp(56px,9vw,120px);
+  line-height: 0.9; letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+.work-hero h1 em { color: var(--color-brand-blue); font-style: normal; }
+.work-filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+}
+.filter-btn {
+  padding: 7px 16px; border-radius: var(--radius-full);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-bg-surface); color: var(--color-ink);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.13s;
+}
+.filter-btn:hover { background: var(--color-bg-hover); }
+.filter-btn.active { background: var(--color-btn-bg); color: var(--color-btn-text); border-color: var(--color-btn-bg); }
+
+.work-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 28px;
+  margin-bottom: 60px; overflow: visible; padding: 8px; margin: -8px 0 52px;
+}
+@media (max-width: 700px) { .work-grid { grid-template-columns: 1fr; } }
+.work-card {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2);
+  display: flex; flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+.work-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+@media (max-width: 700px) { .work-card.featured { grid-column: span 1; display: flex; } }
+.work-card-thumb { height: 260px; overflow: hidden; border-bottom: var(--border-width) solid var(--color-border); position: relative; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+.work-card.featured .work-card-thumb { height: 100%; border-bottom: none; border-right: var(--border-width) solid var(--color-border); }
+@media (max-width: 700px) { .work-card.featured .work-card-thumb { border-right: none; border-bottom: var(--border-width) solid var(--color-border); height: 220px; } }
+.work-card-thumb-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.work-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.work-card-body .proj-tags { margin-bottom: 12px; }
+.work-card-title { font-family: var(--font-ui); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--color-ink); line-height: 1.2; margin-bottom: 10px; }
+.work-card-desc { font-size: 15px; color: var(--color-ink-secondary); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+.work-card-meta { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--color-border-subtle); }
+.work-card-role { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-ink-tertiary); }
+.read-more { font-family: var(--font-ui); font-weight: 700; font-size: 13px; color: var(--color-brand-blue); display: flex; align-items: center; gap: 4px; }
+
+/* ═══ ABOUT PAGE ═══ */
+.about-hero {
+  padding: 60px 0 48px;
+  border-bottom: var(--border-width) solid var(--color-border);
+  margin-bottom: 60px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 768px) { .about-hero { grid-template-columns: 1fr; } }
+.about-hero h1 {
+  font-family: var(--font-display); font-size: clamp(52px,8vw,100px);
+  line-height: 0.9; letter-spacing: 0.02em; color: var(--color-ink);
+}
+.about-hero h1 em { color: var(--color-brand-blue); font-style: normal; }
+.about-intro {
+  font-size: clamp(16px,1.5vw,18px); color: var(--color-ink-secondary);
+  line-height: 1.75;
+}
+.about-intro strong { color: var(--color-ink); }
+
+.about-stats {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 60px;
+}
+@media (max-width: 700px) { .about-stats { grid-template-columns: repeat(2,1fr); } }
+.stat-card {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 24px;
+  box-shadow: var(--shadow-2);
+  text-align: center;
+}
+.stat-card .num {
+  font-family: var(--font-display); font-size: 52px; line-height: 1;
+  color: var(--color-brand-blue);
+}
+.stat-card .lbl {
+  font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--color-ink-tertiary); margin-top: 4px;
+}
+
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 60px;
+}
+@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+.about-section-title {
+  font-family: var(--font-display); font-size: clamp(28px,3.5vw,42px);
+  letter-spacing: 0.02em; color: var(--color-ink); line-height: 1;
+  margin-bottom: 24px; padding-bottom: 16px;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+.about-body {
+  font-size: 15px; color: var(--color-ink-secondary); line-height: 1.75;
+}
+.about-body p { margin-bottom: 16px; }
+.about-body p:last-child { margin-bottom: 0; }
+.about-body strong { color: var(--color-ink); }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 20px; position: relative; padding-bottom: 32px;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: ''; position: absolute;
+  left: 36px; top: 28px; bottom: 0;
+  width: 2px; background: var(--color-border-subtle);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-year {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--color-ink-tertiary); text-transform: uppercase;
+  padding-top: 4px; text-align: right;
+}
+.timeline-dot {
+  position: absolute; left: 30px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--color-bg-page);
+  border: var(--border-width) solid var(--color-border);
+}
+.timeline-item:first-child .timeline-dot { background: var(--color-brand-blue); border-color: var(--color-brand-blue); }
+.timeline-content {}
+.timeline-company { font-family: var(--font-ui); font-weight: 800; font-size: 16px; color: var(--color-ink); }
+.timeline-role { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-blue); margin-bottom: 6px; }
+.timeline-desc { font-size: 14px; color: var(--color-ink-secondary); line-height: 1.6; }
+
+/* Skills */
+.skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.skill-item {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md); padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--shadow-1); transition: transform 0.13s, box-shadow 0.13s;
+}
+.skill-item:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-2); }
+.skill-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface-2);
+}
+.skill-name { font-family: var(--font-ui); font-weight: 700; font-size: 14px; color: var(--color-ink); }
+.skill-type { font-family: var(--font-mono); font-size: 10px; color: var(--color-ink-tertiary); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Philosophy cards */
+.philosophy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 60px; }
+@media (max-width: 900px) { .philosophy-grid { grid-template-columns: 1fr; } }
+.philosophy-card {
+  background: var(--color-bg-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-xl); padding: 28px;
+  box-shadow: var(--shadow-2);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.philosophy-card:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-3); }
+.philosophy-num {
+  font-family: var(--font-display); font-size: 52px; line-height: 1;
+  color: var(--color-border-subtle); margin-bottom: 16px;
+}
+.philosophy-title { font-family: var(--font-ui); font-weight: 800; font-size: 17px; color: var(--color-ink); margin-bottom: 10px; }
+.philosophy-desc { font-size: 14px; color: var(--color-ink-secondary); line-height: 1.65; }
+
+/* ═══ ICON SVG ILLUSTRATIONS FOR PROJECT THUMBS ═══ */
+.thumb-icon { width: 80px; height: 80px; opacity: 0.6; }
+
+/* ═══ FOOTER ═══ */
+footer {
+  border-top: var(--border-width) solid var(--color-border);
+  padding: 40px 0;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-copy { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink-tertiary); }
+.footer-links { display: flex; gap: 20px; }
+.footer-link {
+  font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--color-ink-secondary);
+  text-decoration: none; transition: color 0.14s;
+}
+.footer-link:hover { color: var(--color-brand-blue); }
+
+/* ═══ SCROLL ANIMATION ═══ */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══ MOBILE NAV OVERLAY ═══ -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <span class="logo" style="margin:0">
+      <span class="logo-mark" style="background:var(--color-brand-blue)">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      JR
+    </span>
+    <button onclick="closeMobileNav()" style="background:none;border:var(--border-width) solid var(--color-border);border-radius:var(--radius-md);width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-ink)">
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <a href="#" onclick="navigate('home');closeMobileNav()">Home</a>
+  <a href="#" onclick="navigate('work');closeMobileNav()">Work</a>
+  <a href="#" onclick="navigate('about');closeMobileNav()">About</a>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="logo" href="#" onclick="navigate('home')">
+    <span class="logo-mark">
+      <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+    </span>
+    SAMMIE NGUYEN
+  </a>
+  <div class="nav-links" style="margin-left:auto">
+    <a class="nav-link active" id="nav-home" href="#" onclick="navigate('home');return false">Home</a>
+    <a class="nav-link" id="nav-work" href="#" onclick="navigate('work');return false">Work</a>
+    <a class="nav-link" id="nav-about" href="#" onclick="navigate('about');return false">About</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="toggle-pip" id="toggle-pip"></span>
+      <span id="toggle-label">Light</span>
+    </button>
+    <button class="mobile-menu-btn" onclick="openMobileNav()">
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════
+     HOME PAGE
+════════════════════════ -->
+<div class="page-view active" id="page-home">
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left" style="text-align:center;width:100%">
+      <div class="hero-kicker" style="justify-content:center">UI/UX Designer</div>
+      <h1>SAMMIE <em>NGUYEN</em></h1>
+      <p class="hero-sub" style="margin-left:auto;margin-right:auto">UI/UX Designer with experience across design systems, user research, graphic design, and web development. Creating software that is user-friendly and delivers on stakeholder goals.</p>
+      <div style="display:flex;justify-content:center;gap:16px;margin-top:28px;flex-wrap:wrap">
+        <div class="hero-badge blue" style="width:200px;text-align:center">
+          <span class="num">7+</span>
+          <span class="lbl">Years Experience</span>
+        </div>
+        <div class="hero-badge" style="width:200px;text-align:center">
+          <span class="num">4</span>
+          <span class="lbl">Companies</span>
+        </div>
+        <div class="hero-badge" style="width:200px;text-align:center">
+          <span class="num">3</span>
+          <span class="lbl">Design Degrees</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- MARQUEE REMOVED -->
+<div style="display:none">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- Original set -->
+    <div class="marquee-item"><svg width="179" height="36" viewBox="0 0 179 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M177.939 0.617188H179V2.87988H177.516V3.29102H179V4.52539C178.3 4.59328 177.6 4.6615 176.879 4.73145C177.579 4.79933 178.279 4.86756 179 4.9375V5.96582C178.788 5.97589 178.577 5.98572 178.358 5.99609C178.085 6.01147 177.81 6.02712 177.528 6.04297C177.255 6.05728 176.982 6.07119 176.701 6.08594C176.48 6.11403 176.259 6.14293 176.031 6.17188C175.961 6.30761 175.89 6.44316 175.818 6.58301H179C178.93 7.05803 178.86 7.53306 178.788 8.02246C178.607 8.03019 178.606 8.0302 178.421 8.03809C177.876 8.06187 177.331 8.08797 176.786 8.11328C176.596 8.12137 176.405 8.12937 176.209 8.1377C176.028 8.14631 175.847 8.15421 175.66 8.16309C175.493 8.17062 175.325 8.17876 175.152 8.18652C174.755 8.18878 174.755 8.18887 174.546 8.43457C175.876 8.50246 177.206 8.56971 178.576 8.63965C178.506 9.11485 178.435 9.59048 178.363 10.0801C178.205 10.0831 178.047 10.0858 177.884 10.0889C177.169 10.1041 176.454 10.1245 175.739 10.1445C175.49 10.1492 175.24 10.1534 174.983 10.1582C174.746 10.1655 174.508 10.1732 174.263 10.1807C173.933 10.1887 173.933 10.189 173.597 10.1973C173.332 10.2413 173.332 10.2412 173.062 10.2861C172.922 10.4897 172.782 10.6936 172.638 10.9033C174.387 10.9712 176.137 11.0385 177.939 11.1084C177.727 12.3422 177.727 12.3429 177.516 12.7539C177.214 12.7568 177.214 12.7568 176.906 12.7598C176.158 12.7688 175.41 12.7818 174.662 12.7969C174.339 12.8027 174.016 12.8077 173.692 12.8105C173.227 12.815 172.761 12.8244 172.296 12.835C171.876 12.8414 171.876 12.8411 171.448 12.8477C170.617 12.9075 170.617 12.9079 169.88 13.7832C173.344 13.885 173.345 13.8844 176.879 13.9883C176.402 15.3768 176.402 15.3774 176.031 16.0459C175.652 16.052 175.652 16.0524 175.266 16.0586C174.328 16.0742 173.391 16.0923 172.453 16.1113C172.048 16.1192 171.642 16.1264 171.236 16.1328C170.653 16.1422 170.07 16.1536 169.486 16.166C169.305 16.1684 169.123 16.1714 168.937 16.1738C168.682 16.1799 168.682 16.1793 168.423 16.1855C168.274 16.1883 168.125 16.1915 167.972 16.1943C167.48 16.2607 167.129 16.4283 166.699 16.6631V17.0742C166.489 17.21 166.279 17.3455 166.062 17.4854C169.002 17.5532 171.942 17.6215 174.971 17.6914C174.831 18.0308 174.69 18.3701 174.546 18.7197C174.499 18.8553 174.451 18.9912 174.402 19.1309C174.215 19.5615 174.05 19.8378 173.698 20.1602C172.907 20.3604 172.135 20.3172 171.323 20.2881C170.843 20.2853 170.362 20.2821 169.882 20.2793C169.127 20.266 168.371 20.2497 167.616 20.2324C166.886 20.2182 166.155 20.2146 165.425 20.2109C165.202 20.2024 164.979 20.1933 164.749 20.1846C162.721 20.1784 162.569 20.6087 160.761 22.0117C164.47 22.0796 168.179 22.1469 172.001 22.2168C171.487 23.4626 170.967 24.447 169.88 25.3027C168.992 25.5402 168.157 25.5491 167.239 25.5146C166.796 25.498 166.354 25.4942 165.911 25.4932C165.131 25.4893 164.351 25.4746 163.57 25.4561C162.322 25.4266 161.074 25.4065 159.825 25.4004C159.392 25.3956 158.959 25.3818 158.525 25.3672C157.216 25.3542 156.318 25.3488 155.299 26.2031C155.062 26.4452 154.832 26.6932 154.61 26.9482C154.438 27.1198 154.265 27.292 154.087 27.4688C151.897 29.9887 150.794 32.9097 149.732 36H145.702C146.181 33.9119 146.181 33.9115 146.479 33.2441C146.546 33.0959 146.612 32.9477 146.681 32.7949C146.751 32.6436 146.823 32.4919 146.896 32.3359C146.97 32.1752 147.045 32.0142 147.122 31.8486C148.2 29.5939 149.63 27.693 151.429 25.9199C151.59 25.7604 151.752 25.6009 151.919 25.4365C153.602 23.8708 155.517 22.6326 157.437 21.3594C160.092 19.5973 162.734 17.8293 165.215 15.8398C165.339 15.7407 165.463 15.6412 165.591 15.5391C169.43 12.4476 173.455 8.97222 175.606 4.52539H172.426C172.426 3.90886 172.425 3.90857 172.754 3.56348C173.462 3.19323 173.999 3.23832 174.798 3.26562C175.279 3.28005 175.761 3.28981 176.243 3.29102C176.313 3.22326 176.383 3.15574 176.455 3.08594H174.122C174.334 2.26326 174.334 2.26272 174.758 1.85156C175.263 1.81138 175.264 1.81171 175.846 1.82617C176.038 1.82988 176.231 1.8331 176.43 1.83691C176.578 1.84168 176.726 1.84665 176.879 1.85156V1.64551H175.395C175.461 1.26016 175.461 1.25995 175.606 0.823242C176.23 0.419966 176.588 0.334012 177.304 0.206055C177.374 0.138192 177.444 0.0699195 177.516 0H177.939V0.617188ZM10.2617 12.3057C13.1966 10.0926 15.6409 9.91859 19.2998 10.2861C19.0008 11.1558 18.3519 11.3956 17.5762 11.8418C17.2643 12.0259 16.953 12.2107 16.6416 12.3955C16.483 12.4894 16.3236 12.5829 16.1602 12.6797C15.4598 13.1007 14.7746 13.5424 14.0908 13.9883C13.899 14.1132 13.8988 14.1138 13.7031 14.2412C13.4425 14.4111 13.1814 14.5808 12.9209 14.751C12.1899 15.2276 11.4567 15.7013 10.7236 16.1748C10.4545 16.3488 10.1851 16.5223 9.91602 16.6963C9.72336 16.8209 9.53052 16.9459 9.33203 17.0742C10.0972 17.8455 10.8975 18.5166 11.7705 19.1699C11.9001 19.2677 12.0296 19.366 12.1631 19.4668C12.5618 19.7674 12.9615 20.0671 13.3613 20.3662C13.5404 20.5004 13.541 20.4998 13.7236 20.6367C14.404 21.1463 15.0853 21.6549 15.7676 22.1621C16.1393 22.4389 16.511 22.7163 16.8818 22.9941L17.9795 23.8174C18.4814 24.1928 18.984 24.5504 19.5117 24.8916V25.3027C14.4634 25.7151 14.463 25.7153 12.9688 24.6396C12.5029 24.2404 12.0591 23.8243 11.623 23.3945C10.8761 22.7009 10.0355 22.1156 9.21289 21.5098C8.89413 21.2705 8.57487 21.0312 8.25684 20.791C8.11215 20.6824 7.96743 20.5738 7.81836 20.4619C7.47802 20.2025 7.14517 19.9338 6.81348 19.6641C6.38765 19.287 6.38735 19.2869 5.8457 19.3369C5.08695 19.6241 4.63654 19.8162 4.0293 20.3662C3.83539 21.2036 3.8417 22.0302 3.84375 22.8857C3.83938 23.1174 3.83556 23.3492 3.83105 23.5879C3.82107 24.1594 3.81828 24.7312 3.81738 25.3027H0V10.2861H3.81738V16.457C4.60038 15.9733 5.38371 15.4896 6.19043 14.9912C6.45273 14.8313 6.7151 14.6716 6.98535 14.5068C8.1177 13.8128 9.21172 13.1151 10.2617 12.3057Z" fill="#FFCB51"/><path d="M25.6621 25.3027H21.6328V15.2227H25.6621V25.3027Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="139" height="36" viewBox="0 0 139 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M38.4712 20.6452V20.3875C38.8339 20.2845 39.0887 20.0743 39.2357 19.756C39.3819 19.4385 39.4558 18.9619 39.4558 18.3261V5.67283C39.4558 5.05435 39.3819 4.58635 39.2357 4.26811C39.0887 3.95059 38.8339 3.73963 38.4712 3.63667V3.37891H44.6125V3.63667C44.2498 3.73963 43.9906 3.95059 43.835 4.26811C43.6793 4.58635 43.6019 5.05435 43.6019 5.67283V18.3261C43.6019 18.9619 43.6793 19.4385 43.835 19.756C43.9906 20.0743 44.2498 20.2845 44.6125 20.3875V20.6452H38.4712ZM16.6496 15.734C16.6496 15.734 25.6752 16.6815 32.492 3.19234H21.5783C20.8239 3.19234 20.5865 3.97786 20.5865 3.97786C20.1948 5.51434 20.4547 9.1453 16.1363 13.4401V5.54458C16.1363 4.12906 15.9365 2.81362 13.3903 2.81362L3.41635 2.78914C3.41635 2.78914 1.73821 2.75026 1.73821 4.4581V30.2499C1.73821 30.2499 1.5384 32.1219 3.6205 32.1219H9.09653C9.09653 32.1219 10.7616 32.2537 10.7616 30.2996V20.2117C10.7616 20.2117 10.6045 17.5923 13.3954 17.5923C16.1863 17.5923 16.1182 20.2117 16.1182 20.2117V30.2996C16.1182 30.2996 16.1182 32.0499 17.8781 32.0499H32.3153C32.3153 32.0499 32.61 18.2187 23.5026 18.2187C17.3706 18.2187 16.6496 15.7347 16.6496 15.7347V15.734Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="96" height="36" viewBox="0 0 96 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M96 36L0.00878906 35.999L0 20.3389L44.96 20.3682L95.999 20.3359L96 36Z" fill="#FFCB51"/><path d="M82.4824 0C82.5311 0.0162466 82.5911 0.0321765 82.634 0.0627212C82.9197 0.266396 81.713 1.88421 81.9663 2.83505C82.897 6.32794 85.3565 4.70459 86.6979 5.48164C86.7326 5.69229 86.7734 5.90189 86.8199 6.11044C87.3658 5.96061 91.7896 1.0158 92.6498 0.116649L92.6469 5.34129C93.1031 5.32549 93.3983 5.30627 93.8581 5.37394C94.2443 5.59908 94.2938 5.66596 94.4869 6.07041C94.3472 7.22979 93.5677 7.08681 92.6459 7.05364L92.6483 17.6869C91.5213 17.6634 88.5801 17.9431 87.8559 17.4225L87.8178 16.8635L87.8154 7.06022L84.7085 7.05706L84.7196 17.6935C83.1285 17.6661 81.4865 17.6898 79.8912 17.6927L79.9117 10.3077C79.912 9.94432 79.9691 7.48995 79.7184 7.13711C79.635 7.01967 79.2025 7.22558 78.6508 6.67262C78.4893 6.19838 78.5382 5.98115 78.5977 5.49717C78.8684 5.22359 79.2327 5.32391 79.7484 5.28757C79.9286 4.95474 80.0977 2.92062 80.3121 2.31763C80.7488 1.08926 81.3497 0.590539 82.4824 0Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="96" height="36" viewBox="0 0 96 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M71.1996 27.0991H71.5353C72.8483 27.0991 74.1611 27.1143 75.4587 27.0991C76.8021 27.0838 78.1303 26.9009 79.3973 26.459C82.0536 25.5292 83.9008 23.7764 84.7099 21.0483C85.2747 19.1431 85.2747 17.1922 84.8015 15.2718C84.3283 13.3667 83.2901 11.812 81.6719 10.6842C80.069 9.55631 78.2524 9.02286 76.3136 8.93141C74.6649 8.85521 73.0162 8.88569 71.3674 8.87045C71.3064 8.87045 71.2605 8.88569 71.1996 8.90093V27.0991ZM61.2156 0H75.7641C75.8403 0.0152413 75.9167 0.0457239 75.9778 0.0457239C78.1303 0.0914479 80.2522 0.365791 82.3437 0.944962C85.4427 1.78324 88.221 3.20068 90.5109 5.47164C93.1978 8.12362 94.6786 11.3547 95.1824 15.0736C95.2434 15.531 95.3045 16.0033 95.3502 16.4607V19.2041C95.335 19.2802 95.3045 19.3565 95.3045 19.4174C95.2129 20.0881 95.167 20.7739 95.0449 21.4445C93.9458 27.1448 90.74 31.2447 85.5037 33.7596C82.2215 35.3294 78.7256 35.9085 75.1229 35.9238C70.6041 35.9543 66.0701 35.9238 61.5514 35.9238H61.2003V27.1905H44.3162V21.9475H61.1698V14.0373H44.3314V8.76376H61.2003V0ZM27.3261 21.597C27.3719 21.475 27.4177 21.3836 27.4482 21.2921C28.3947 18.6859 28.2573 16.1406 27.0055 13.6715C25.2041 10.105 21.0823 8.10838 17.2353 8.93141C12.3501 9.98307 9.23591 14.586 10.0603 19.5241C10.8999 24.5385 15.5102 27.8459 20.5327 27.0381C21.0518 26.9467 21.5555 26.7942 22.0746 26.6571C22.0898 26.6113 22.1051 26.5808 22.1051 26.5351C20.7311 25.1634 19.3572 23.8069 18.0291 22.4657C19.7083 20.7892 21.4029 19.0973 23.1126 17.3904C24.5019 18.7773 25.9063 20.1795 27.3261 21.597ZM0 19.2041V16.7502C0.0152659 16.674 0.0457979 16.613 0.0610639 16.5368C0.152659 15.8967 0.213723 15.2413 0.335851 14.6011C1.08388 10.928 2.85473 7.83404 5.57208 5.27349C8.80846 2.24047 12.6555 0.563929 17.0521 0.106689C17.388 0.0762066 17.7237 0.0304827 18.0596 0H19.9984C20.0747 0.0152413 20.1358 0.0457239 20.2122 0.0457239C23.0974 0.213379 25.8452 0.92972 28.3642 2.34717C33.9515 5.47163 37.31 10.1355 37.9359 16.5826C38.2564 19.8289 37.6 22.9382 36.0888 25.8341C35.5849 26.7942 34.959 27.6934 34.3485 28.7146C36.7147 31.077 39.1419 33.5005 41.5845 35.939C41.4929 35.939 41.4165 35.939 41.3402 35.939C39.1419 35.939 36.9436 35.9543 34.7453 35.9543C34.6385 35.9543 34.5163 35.9848 34.4094 36H31.4784C30.6388 35.1465 29.7992 34.2929 28.9442 33.4547C28.8985 33.409 28.7305 33.409 28.6542 33.4547C24.7308 35.5885 20.548 36.3505 16.1209 35.7104C11.5716 35.055 7.70931 33.0736 4.59506 29.6748C2.16777 27.0228 0.671702 23.9137 0.167925 20.3472C0.106862 19.9662 0.0457979 19.5851 0 19.2041Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="141" height="36" viewBox="0 0 141 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.7976 12.2635C17.5628 11.7815 18.1596 11.8202 19.0144 12.0086C20.5222 12.7849 21.2151 14.2373 21.7225 15.7996C22.8197 19.6588 22.1812 23.8938 20.3621 27.4227C19.6324 28.7529 18.7097 29.8345 17.6551 30.9109C17.5656 31.0106 17.4758 31.111 17.3836 31.2137C14.879 33.949 10.5693 35.6408 6.96464 35.9988C6.36447 35.9275 6.13111 35.7853 5.72929 35.3318C5.55956 34.8938 5.55906 34.8939 5.57792 34.4178C6.10346 33.6358 6.48714 33.3782 7.408 33.1219C10.0065 32.3333 12.0234 30.7784 13.3523 28.368C14.3638 26.2828 14.6705 24.0031 14.0359 21.7576C13.5038 20.2073 12.6348 18.9505 11.6609 17.657C11.1621 16.986 11.0607 16.4987 11.1639 15.6668C11.5828 14.6865 12.349 14.3791 13.2771 13.99C13.5945 13.8716 13.9123 13.7541 14.2303 13.6375C15.1703 13.2851 15.9616 12.8126 16.7976 12.2635ZM68.2986 16.0965C70.8558 13.2284 75.5276 11.4933 78.9422 14.0213C80.2276 15.1673 80.8176 16.5098 80.9412 18.2273C80.9642 19.6897 80.7557 21.0994 80.4578 22.5272C79.9334 22.698 79.9334 22.698 79.4305 22.6971C79.0552 22.6926 76.5094 22.6919 75.9568 22.6902C74.8299 22.6847 72.0527 22.6827 70.9461 22.6795C70.9891 22.8956 71.0341 23.1112 71.0789 23.327C71.782 24.8543 73.4727 25.7077 77.285 24.824C78.6463 26.1854 78.4896 27.8624 78.1189 28.2498C74.1485 29.4515 71.0209 29.6931 68.6346 28.3768C67.1751 27.4038 66.3724 26.1529 66.0027 24.4422C65.7911 21.3975 66.376 18.5314 68.2986 16.0965Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="73" height="36" viewBox="0 0 73 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.43619 0H19.0851C18.9178 0.648118 18.7653 1.4924 18.6251 2.16471L17.8246 5.98409C18.8891 5.46117 19.4672 5.53969 20.627 5.53863L22.9402 5.53747L26.2721 5.53822C26.9997 5.53869 27.7612 5.51582 28.4863 5.58031C28.9652 5.62291 29.3397 5.90425 29.6366 6.27008C29.7185 6.03751 29.7658 5.79754 29.8195 5.5568C30.742 5.52063 31.7337 5.53905 32.662 5.53911L37.3891 5.54077L39.8421 5.53732C41.1805 5.53445 41.9397 5.36487 42.8014 6.59669L43.0026 5.54417L50.4687 5.55328L52.8261 5.55488C54.0596 5.55881 55.1514 5.45357 56.1048 6.39253C56.3867 6.67376 56.6088 7.00894 56.7579 7.37803C58.0439 6.08425 58.9239 5.54397 60.7384 5.53845L67.1314 5.54066C68.0164 5.54099 69.344 5.58355 70.2021 5.53728C70.0742 6.05983 69.9614 6.61957 69.8602 7.14836C69.5346 8.85181 69.115 10.5575 68.807 12.262L67.7804 12.2635C68.7992 13.0441 69.1529 13.7951 69.3527 15.0716C69.9194 18.6931 67.2125 21.922 63.6515 22.3776C62.5716 22.5158 61.2224 22.4453 60.0974 22.4454L53.8981 22.4447L48.3245 22.4458C46.0776 22.4474 44.1312 22.687 42.3133 21.0429C42.2689 21.414 42.1012 22.0656 42.0098 22.4507L31.1656 22.4443C29.6787 22.4445 28.021 22.4816 26.5455 22.4402C26.6038 22.173 26.655 21.9043 26.6989 21.6344C26.3833 21.9377 25.7872 22.3043 25.3614 22.3638C24.2969 22.4999 23.1769 22.4411 22.1001 22.4452C20.4856 22.4514 18.8679 22.451 17.2537 22.4422C15.8626 22.4345 14.8466 22.1209 14.0762 20.9329C12.5681 22.6448 11.2838 22.4449 9.2186 22.446L5.97991 22.4466L3.90106 22.4454C3.46085 22.4449 2.82711 22.4702 2.40877 22.3854C1.38489 22.1778 0.550422 21.2647 0.200327 20.3132C0.130944 20.1247 0.0753354 19.9059 0 19.731V18.7981C0.0991784 18.5721 0.437809 16.8006 0.510499 16.4536L1.74183 10.625C4.04866 10.5902 6.49422 10.6142 8.80676 10.6282C9.08274 9.59757 9.33987 8.26055 9.57521 7.19504C9.07306 7.16771 8.4212 7.17115 7.91723 7.18724L9.43619 0Z" fill="#FFCB51"/></svg></div>
+    <!-- Duplicate set for seamless loop -->
+    <div class="marquee-item"><svg width="179" height="36" viewBox="0 0 179 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.2617 12.3057C13.1966 10.0926 15.6409 9.91859 19.2998 10.2861C19.0008 11.1558 18.3519 11.3956 17.5762 11.8418C17.2643 12.0259 16.953 12.2107 16.6416 12.3955C14.0908 13.9883 13.899 14.1132 13.7031 14.2412C10.7236 16.1748 10.4545 16.3488 10.1851 16.5223C9.33203 17.0742 10.0972 17.8455 11.7705 19.1699C14.404 21.1463 15.7676 22.1621 16.8818 22.9941L17.9795 23.8174C18.4814 24.1928 18.984 24.5504 19.5117 24.8916V25.3027C14.4634 25.7151 12.9688 24.6396 11.623 23.3945C9.21289 21.5098 8.89413 21.2705 7.81836 20.4619C7.47802 20.2025 6.38765 19.287 5.8457 19.3369C5.08695 19.6241 4.0293 20.3662 3.84375 22.8857C3.82107 24.1594 3.81738 25.3027 3.81738 25.3027H0V10.2861H3.81738V16.457C6.19043 14.9912 8.1177 13.8128 10.2617 12.3057ZM25.6621 25.3027H21.6328V15.2227H25.6621V25.3027Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="139" height="36" viewBox="0 0 139 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.6496 15.734C16.6496 15.734 25.6752 16.6815 32.492 3.19234H21.5783C20.8239 3.19234 20.5865 3.97786 20.5865 3.97786C20.1948 5.51434 20.4547 9.1453 16.1363 13.4401V5.54458C16.1363 4.12906 15.9365 2.81362 13.3903 2.81362L3.41635 2.78914C3.41635 2.78914 1.73821 2.75026 1.73821 4.4581V30.2499C1.73821 30.2499 1.5384 32.1219 3.6205 32.1219H9.09653C9.09653 32.1219 10.7616 32.2537 10.7616 30.2996V20.2117C10.7616 20.2117 10.6045 17.5923 13.3954 17.5923C16.1863 17.5923 16.1182 20.2117 16.1182 20.2117V30.2996C16.1182 30.2996 16.1182 32.0499 17.8781 32.0499H32.3153C32.3153 32.0499 32.61 18.2187 23.5026 18.2187C17.3706 18.2187 16.6496 15.7347 16.6496 15.7347V15.734Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="96" height="36" viewBox="0 0 96 36" fill="none"><path d="M96 36L0 36L0 20.3389L44.96 20.3682L96 20.3359L96 36Z" fill="#FFCB51"/><path d="M2.58175 0.146173L8.66208 0.136719L8.66893 17.6891L2.44968 17.6886C2.44784 15.7203 2.25949 0.987468 2.58175 0.146173Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="96" height="36" viewBox="0 0 96 36" fill="none"><path d="M27.3261 21.597C27.3719 21.475 27.4177 21.3836 27.4482 21.2921C28.3947 18.6859 28.2573 16.1406 27.0055 13.6715C25.2041 10.105 21.0823 8.10838 17.2353 8.93141C12.3501 9.98307 9.23591 14.586 10.0603 19.5241C10.8999 24.5385 15.5102 27.8459 20.5327 27.0381C21.0518 26.9467 21.5555 26.7942 22.0746 26.6571V26.5351C20.7311 25.1634 19.3572 23.8069 18.0291 22.4657C19.7083 20.7892 21.4029 19.0973 23.1126 17.3904C24.5019 18.7773 25.9063 20.1795 27.3261 21.597ZM0 19.2041V16.7502C0.0610639 16.5368 0.213723 15.2413 0.335851 14.6011C1.08388 10.928 2.85473 7.83404 5.57208 5.27349C8.80846 2.24047 12.6555 0.563929 17.0521 0.106689H19.9984C23.0974 0.213379 25.8452 0.92972 28.3642 2.34717C33.9515 5.47163 37.31 10.1355 37.9359 16.5826C38.2564 19.8289 37.6 22.9382 36.0888 25.8341C35.5849 26.7942 34.959 27.6934 34.3485 28.7146C36.7147 31.077 39.1419 33.5005 41.5845 35.939H34.4094C30.6388 35.1465 29.7992 34.2929 28.9442 33.4547C24.7308 35.5885 20.548 36.3505 16.1209 35.7104C11.5716 35.055 7.70931 33.0736 4.59506 29.6748C2.16777 27.0228 0.671702 23.9137 0.167925 20.3472C0.106862 19.9662 0 19.2041 0 19.2041Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="141" height="36" viewBox="0 0 141 36" fill="none"><path d="M11.9832 0.782033C15.3959 -0.193141 16.2967 0.432424 16.5984 1.94707C16.0486 2.49505 15.5216 2.68959 14.7869 2.9002C12.4018 3.64472 10.2982 5.23543 9.0496 7.43535C8.29569 9.26446 7.56504 11.8009 9.00273 16.0477C9.45682 16.8557 10.0013 17.5854 10.5672 18.3152C11.1824 19.9832 10.8152 21.0629 10.2527 21.5086C9.54427 21.9139 8.78612 22.1644 8.01737 22.4295C7.13127 22.7399 6.38016 23.1207 5.6121 23.6727C4.9356 24.1269 4.4274 24.2688 3.6121 24.1316C2.62877 23.8667 1.91517 23.0362 1.35038 22.2215C-0.297462 19.1264 -0.315597 15.0503 0.642374 11.7264C0.949078 10.7656 1.34975 9.85792 1.80351 8.95977C2.70293 7.26099 3.5196 6.17227 4.46073 5.21172C6.83073 2.94066 9.32842 1.57303 11.9832 0.782033Z" fill="#FFCB51"/></svg></div>
+    <div class="marquee-item"><svg width="73" height="36" viewBox="0 0 73 36" fill="none"><path d="M7.11293 28.308C8.39731 28.1452 9.57161 29.0514 9.7395 30.3351C9.90738 31.6188 9.00563 32.7966 7.72256 32.9695C6.4324 33.1433 5.24666 32.2355 5.07785 30.9447C4.90905 29.654 5.82147 28.4718 7.11293 28.308Z" fill="#FFCB51"/><path d="M9.43619 0H19.0851L17.8246 5.98409C18.8891 5.46117 20.627 5.53863 22.9402 5.53747L26.2721 5.53822C26.9997 5.53869 28.4863 5.58031 29.6366 6.27008C29.8195 5.5568 32.662 5.53911 37.3891 5.54077L39.8421 5.53732C41.1805 5.53445 42.8014 6.59669 43.0026 5.54417L50.4687 5.55328L52.8261 5.55488C55.1514 5.45357 56.7579 7.37803 58.0439 6.08425C60.7384 5.53845 67.1314 5.54066 70.2021 5.53728C69.8602 7.14836 68.807 12.262 67.7804 12.2635C69.3527 15.0716 69.9194 18.6931 63.6515 22.3776L60.0974 22.4454L48.3245 22.4458C46.0776 22.4474 42.3133 21.0429 42.0098 22.4507L31.1656 22.4443L26.5455 22.4402C26.6989 21.6344 25.3614 22.3638 22.1001 22.4452L17.2537 22.4422C14.0762 20.9329 12.5681 22.6448 9.2186 22.446L3.90106 22.4454C2.40877 22.3854 0.200327 20.3132 0 18.7981L1.74183 10.625C6.49422 10.6142 9.57521 7.19504 7.91723 7.18724L9.43619 0Z" fill="#FFCB51"/></svg></div>
+  </div>
+</div>
+
+<div class="page">
+  <!-- FEATURED PROJECTS -->
+  <div class="sec-wrap fade-up">
+    <div class="sec-head">
+      <div>
+        <div class="sec-kicker">01   Selected Work</div>
+        <div class="sec-title">Featured Projects</div>
+      </div>
+      <div class="sec-action">
+        <a class="btn btn-secondary" href="#" onclick="navigate('work');return false">
+          View All Work
+          <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="projects-grid">
+      <!-- Card 1 -->
+      <div class="proj-card fade-up">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner t1">
+            <svg class="thumb-icon" viewBox="0 0 80 80" fill="none"><rect x="10" y="14" width="60" height="52" rx="6" stroke="#004BEF" stroke-width="3"/><path d="M10 26h60" stroke="#004BEF" stroke-width="2"/><rect x="20" y="34" width="20" height="14" rx="3" fill="#004BEF" opacity=".18"/><rect x="44" y="34" width="16" height="6" rx="3" fill="#004BEF" opacity=".3"/><rect x="44" y="44" width="10" height="4" rx="2" fill="#004BEF" opacity=".2"/></svg>
+          </div>
+          <div class="proj-thumb-tags">
+            <span class="proj-tag blue">UI/UX</span>
+            <span class="proj-tag">Design System</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Design UI Library for Better Interface Consistency</div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="proj-meta-label">Client</span><span class="proj-meta-value">Kitomba Spa and Salon Software</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Role</span><span class="proj-meta-value">UI/UX Designer</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Scope</span><span class="proj-meta-value">Reviewed the design system and built a UI library to streamline the interface and improve product predictability.</span></div>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-year">2024</span>
+            <span class="proj-arrow">
+              <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="proj-card fade-up" style="transition-delay:.08s">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner t2">
+            <svg class="thumb-icon" viewBox="0 0 80 80" fill="none"><rect x="15" y="10" width="50" height="60" rx="8" stroke="#92400E" stroke-width="3"/><rect x="24" y="22" width="32" height="4" rx="2" fill="#92400E" opacity=".3"/><rect x="24" y="30" width="22" height="4" rx="2" fill="#92400E" opacity=".2"/><circle cx="40" cy="52" r="10" stroke="#92400E" stroke-width="2.5" opacity=".4"/></svg>
+          </div>
+          <div class="proj-thumb-tags">
+            <span class="proj-tag yellow">UI/UX</span>
+            <span class="proj-tag">Web App</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Jonas Leisure App</div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="proj-meta-label">Client</span><span class="proj-meta-value">Jonas Leisure</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Role</span><span class="proj-meta-value">Design concept, build UI library, enhance features</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Scope</span><span class="proj-meta-value">Consumer UI with bold, adaptive branding. Multi-client support with flexible brand identity and logo customisation.</span></div>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-year">2024</span>
+            <span class="proj-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="proj-card fade-up" style="transition-delay:.16s">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner t3">
+            <svg class="thumb-icon" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="26" stroke="#0891B2" stroke-width="3"/><path d="M28 40h24M40 28v24" stroke="#0891B2" stroke-width="2.5" stroke-linecap="round"/><circle cx="40" cy="40" r="10" fill="#0891B2" opacity=".15"/></svg>
+          </div>
+          <div class="proj-thumb-tags">
+            <span class="proj-tag blue">UI Audit</span>
+            <span class="proj-tag">Design System</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">UI Audit for Seekom</div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="proj-meta-label">Client</span><span class="proj-meta-value">Seekom Global Travel Solutions</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Role</span><span class="proj-meta-value">UI/UX Designer</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Scope</span><span class="proj-meta-value">Built a basic UI library, audited UI problems, and provided solutions for interface consistency and development.</span></div>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-year">2023</span>
+            <span class="proj-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="proj-card fade-up" style="transition-delay:.04s">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner t4">
+            <svg class="thumb-icon" viewBox="0 0 80 80" fill="none"><rect x="10" y="20" width="28" height="40" rx="5" stroke="#059669" stroke-width="2.5"/><rect x="42" y="28" width="28" height="32" rx="5" stroke="#059669" stroke-width="2.5"/><path d="M18 36h12M18 42h8M50 38h12M50 44h8" stroke="#059669" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg>
+          </div>
+          <div class="proj-thumb-tags">
+            <span class="proj-tag">UI/UX</span>
+            <span class="proj-tag">Tablet</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Improve the Stock Order Feature's UX/UI</div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="proj-meta-label">Client</span><span class="proj-meta-value">Kitomba Spa and Salon Software</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Role</span><span class="proj-meta-value">UI/UX Designer</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Scope</span><span class="proj-meta-value">Streamlined workflows and created a new design system to boost engagement and improve tablet UX.</span></div>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-year">2023</span>
+            <span class="proj-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="proj-card fade-up" style="transition-delay:.12s">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner t5">
+            <svg class="thumb-icon" viewBox="0 0 80 80" fill="none"><path d="M40 14L14 30v20l26 16 26-16V30L40 14z" stroke="#9F1239" stroke-width="2.5"/><path d="M40 14v36M14 30l26 16M66 30L40 46" stroke="#9F1239" stroke-width="1.8" stroke-linecap="round" opacity=".4"/></svg>
+          </div>
+          <div class="proj-thumb-tags">
+            <span class="proj-tag">UI/UX</span>
+            <span class="proj-tag">Booking</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Redesign Online Booking UI</div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="proj-meta-label">Client</span><span class="proj-meta-value">Kitomba Salon and Spa Software</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Role</span><span class="proj-meta-value">UI/UX Designer</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Scope</span><span class="proj-meta-value">Redesigned the booking flow with a new design system to improve usability and interface consistency.</span></div>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-year">2022</span>
+            <span class="proj-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="proj-card fade-up" style="transition-delay:.20s">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner t6">
+            <svg class="thumb-icon" viewBox="0 0 80 80" fill="none"><rect x="12" y="12" width="56" height="56" rx="28" stroke="#7C3AED" stroke-width="3"/><path d="M27 40h26M40 27v26" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" opacity=".5"/><circle cx="40" cy="40" r="8" fill="#7C3AED" opacity=".2"/></svg>
+          </div>
+          <div class="proj-thumb-tags">
+            <span class="proj-tag">UI/UX</span>
+            <span class="proj-tag blue">Web App</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Improve the Product Management Feature's UX/UI</div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="proj-meta-label">Client</span><span class="proj-meta-value">Kitomba Spa and Salon Software</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Role</span><span class="proj-meta-value">UI/UX Designer</span></div>
+            <div class="proj-meta-row"><span class="proj-meta-label">Scope</span><span class="proj-meta-value">Redesigned the feature to meet current UX standards and boost web app usage through improved workflows.</span></div>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-year">2022</span>
+            <span class="proj-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="sec-wrap fade-up">
+    <div class="sec-head">
+      <div>
+        <div class="sec-kicker">02   Social Proof</div>
+        <div class="sec-title">What People Say</div>
+      </div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card featured">
+        <div class="testi-quote">Thanks to Sammie's consistency, the updated system feels familiar to our users. The UI library they created is our go-to guide and foundation for ongoing UX improvements. Sammie's guidance has boosted our team's confidence and user-centric mindset for tackling future design challenges internally.</div>
+        <div class="testi-author">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <div class="testi-name">Alex McAndrew</div>
+            <div class="testi-role">Intersoft System</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">I love the example Sammie created of the calendar for Seekom using the new UI; it instantly looks more modern!</div>
+        <div class="testi-author">
+          <div class="testi-avatar">JM</div>
+          <div>
+            <div class="testi-name">Julia Martin</div>
+            <div class="testi-role">Seekom</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">Sammie brought structure and creativity to every brief. Her ability to organise complex UI into something clean and consistent made a real difference to our product.</div>
+        <div class="testi-author">
+          <div class="testi-avatar">JD</div>
+          <div>
+            <div class="testi-name">John Doe</div>
+            <div class="testi-role">Company Name</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV / RESUME -->
+  <div class="sec-wrap fade-up">
+    <div class="cv-section">
+      <div class="cv-bg-text">CV</div>
+      <div>
+        <div class="cv-kicker">03   Resume</div>
+        <div class="cv-title">LET'S WORK<br><em>TOGETHER</em></div>
+        <p class="cv-desc">UX/UI Designer with experience across design systems, user research, graphic design, and web development. Open to new product design opportunities.</p>
+      </div>
+      <div class="cv-actions">
+        <a class="btn-cv-primary" href="#" onclick="return false">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M3 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download CV
+        </a>
+        <a class="btn-cv-secondary" href="mailto:nhthuong23@gmail.com">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          nhthuong23@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+<div class="page">
+  <footer>
+    <span class="footer-copy">© 2024 Sammie Nguyen. All rights reserved.</span>
+    <div class="footer-links">
+      <a class="footer-link" href="#">LinkedIn</a>
+      <a class="footer-link" href="#">Behance</a>
+      <a class="footer-link" href="#">Instagram</a>
+    </div>
+  </footer>
+</div>
+</div><!-- /page-home -->
+
+
+<!-- ════════════════════════
+     WORK PAGE
+════════════════════════ -->
+<div class="page-view" id="page-work">
+<div class="page">
+  <div class="work-hero fade-up">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <h1>SELECTED<br><em>WORK</em></h1>
+      <p style="font-size:15px;color:var(--color-ink-secondary);max-width:340px;line-height:1.7;padding-bottom:8px">A collection of case studies spanning product design, systems, research, and brand   built across eight years of craft.</p>
+    </div>
+  </div>
+
+  <div class="work-filters fade-up">
+    <button class="filter-btn active" onclick="filterWork(this,'all')">All Work</button>
+    <button class="filter-btn" onclick="filterWork(this,'product')">Product</button>
+    <button class="filter-btn" onclick="filterWork(this,'system')">Systems</button>
+    <button class="filter-btn" onclick="filterWork(this,'research')">Research</button>
+    <button class="filter-btn" onclick="filterWork(this,'brand')">Brand</button>
+  </div>
+
+  <div class="work-grid" id="workGrid">
+    <!-- Featured Card -->
+    <div class="work-card featured fade-up" data-cat="product">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner t1">
+          <svg width="120" height="120" viewBox="0 0 80 80" fill="none"><rect x="10" y="14" width="60" height="52" rx="6" stroke="#004BEF" stroke-width="3"/><path d="M10 26h60" stroke="#004BEF" stroke-width="2"/><rect x="20" y="34" width="20" height="14" rx="3" fill="#004BEF" opacity=".18"/><rect x="44" y="34" width="16" height="6" rx="3" fill="#004BEF" opacity=".3"/><rect x="44" y="44" width="10" height="4" rx="2" fill="#004BEF" opacity=".2"/><rect x="20" y="52" width="36" height="4" rx="2" fill="#004BEF" opacity=".1"/></svg>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags">
+          <span class="proj-tag blue">Product Design</span>
+          <span class="proj-tag">SaaS · B2B</span>
+          <span class="proj-tag yellow">Featured</span>
+        </div>
+        <div class="work-card-title">Meridian Dashboard   Analytics Reimagined</div>
+        <div class="work-card-desc">A complete overhaul of a complex analytics platform serving 4,000+ enterprise users. The challenge: surface actionable insight without overwhelming non-technical stakeholders. Through 12 weeks of embedded research, prototyping, and co-design sessions, we redesigned information architecture, data hierarchy, and navigation   reducing time-to-insight by 60% and cutting support tickets by 41%.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">Lead Designer · 2024 · 14 weeks</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="work-card fade-up" data-cat="product" style="transition-delay:.06s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner t2"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="15" y="10" width="50" height="60" rx="8" stroke="#92400E" stroke-width="3"/><rect x="24" y="22" width="32" height="4" rx="2" fill="#92400E" opacity=".3"/><rect x="24" y="30" width="22" height="4" rx="2" fill="#92400E" opacity=".2"/><circle cx="40" cy="52" r="10" stroke="#92400E" stroke-width="2.5" opacity=".4"/></svg></div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag yellow">Mobile</span><span class="proj-tag">iOS · Android</span></div>
+        <div class="work-card-title">Folksy   Craft Marketplace App</div>
+        <div class="work-card-desc">Zero-to-one mobile experience for independent craft sellers, covering onboarding, storefront, and order management. Delivered seller retention +34%, conversion +19%.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">Lead Designer · 2024</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="work-card fade-up" data-cat="system" style="transition-delay:.1s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner t3"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="26" stroke="#0891B2" stroke-width="3"/><path d="M28 40h24M40 28v24" stroke="#0891B2" stroke-width="2.5" stroke-linecap="round"/><circle cx="40" cy="40" r="10" fill="#0891B2" opacity=".15"/></svg></div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag blue">Design System</span><span class="proj-tag">Tokens</span></div>
+        <div class="work-card-title">Cascade   Multi-brand Token System</div>
+        <div class="work-card-desc">Scalable design token architecture for 5 product teams across 3 brand identities. Cut design-dev handoff time by 50% with a full Storybook integration.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">Systems Lead · 2023</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="work-card fade-up" data-cat="research" style="transition-delay:.14s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner t4"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="10" y="20" width="28" height="40" rx="5" stroke="#059669" stroke-width="2.5"/><rect x="42" y="28" width="28" height="32" rx="5" stroke="#059669" stroke-width="2.5"/><path d="M18 36h12M18 42h8M50 38h12M50 44h8" stroke="#059669" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg></div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag">UX Research</span><span class="proj-tag">Web App</span></div>
+        <div class="work-card-title">Verdant   Sustainability Tracker</div>
+        <div class="work-card-desc">Research-led redesign uncovering key job-to-be-done shifts that drove 2.4× daily active users. 48 interviews, 3 diary studies, and 6 prototype iterations.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">UX Lead · 2023</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 5 -->
+    <div class="work-card fade-up" data-cat="brand" style="transition-delay:.18s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner t5"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><path d="M40 14L14 30v20l26 16 26-16V30L40 14z" stroke="#9F1239" stroke-width="2.5"/><path d="M40 14v36M14 30l26 16M66 30L40 46" stroke="#9F1239" stroke-width="1.8" stroke-linecap="round" opacity=".4"/></svg></div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag">Brand</span><span class="proj-tag">Motion</span></div>
+        <div class="work-card-title">Prism   Fintech Brand System</div>
+        <div class="work-card-desc">Full visual identity and motion language for a Series B fintech. Logo, type, colour, component animation, and a 120-page brand guidelines document.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">Brand Lead · 2022</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 6 -->
+    <div class="work-card fade-up" data-cat="product" style="transition-delay:.22s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner t6"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="12" y="12" width="56" height="56" rx="28" stroke="#7C3AED" stroke-width="3"/><path d="M27 40h26M40 27v26" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" opacity=".5"/><circle cx="40" cy="40" r="8" fill="#7C3AED" opacity=".2"/></svg></div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag">Accessibility</span><span class="proj-tag blue">WCAG AA</span></div>
+        <div class="work-card-title">Lumina   Accessible Healthcare Portal</div>
+        <div class="work-card-desc">Patient portal audit and redesign achieving full WCAG AA compliance. NPS moved from 22 to 68 in six months   most cited improvement: clarity.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">UX Designer · 2022</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 7 -->
+    <div class="work-card fade-up" data-cat="system" style="transition-delay:.26s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner" style="background:linear-gradient(135deg,#FFF7ED,#FED7AA)">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="14" y="24" width="20" height="20" rx="4" stroke="#C2410C" stroke-width="2.5"/><rect x="46" y="24" width="20" height="20" rx="4" stroke="#C2410C" stroke-width="2.5"/><rect x="30" y="46" width="20" height="20" rx="4" stroke="#C2410C" stroke-width="2.5"/><path d="M24 44v2M56 44v2M40 44v2" stroke="#C2410C" stroke-width="2" stroke-linecap="round" opacity=".4"/></svg>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag">Design Ops</span><span class="proj-tag">Figma</span></div>
+        <div class="work-card-title">Orbit   Internal Component Library</div>
+        <div class="work-card-desc">Led migration from a legacy Sketch library to a Figma-native component system, with auto-layout, variants, and variables. Adopted by 28 designers in 4 weeks.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">Design Systems · 2021</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 8 -->
+    <div class="work-card fade-up" data-cat="research" style="transition-delay:.30s">
+      <div class="work-card-thumb">
+        <div class="work-card-thumb-inner" style="background:linear-gradient(135deg,#F0FFF4,#9AE6B4)">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="36" cy="34" r="18" stroke="#166534" stroke-width="3"/><path d="M49 47l12 12" stroke="#166534" stroke-width="3" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="proj-tags"><span class="proj-tag">Research</span><span class="proj-tag">Usability</span></div>
+        <div class="work-card-title">Scout   Usability Research Framework</div>
+        <div class="work-card-desc">Designed and documented a repeatable research playbook covering screener writing, moderation, synthesis, and stakeholder readout formats. Now used by 3 teams.</div>
+        <div class="work-card-meta">
+          <span class="work-card-role">UX Researcher · 2021</span>
+          <span class="read-more">View Case Study <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-copy">© 2024 Sammie Nguyen · All rights reserved</span>
+    <div class="footer-links">
+      <a class="footer-link" href="#">LinkedIn</a>
+      <a class="footer-link" href="#">Dribbble</a>
+      <a class="footer-link" href="#">Twitter</a>
+    </div>
+  </footer>
+</div>
+</div><!-- /page-work -->
+
+
+<!-- ════════════════════════
+     ABOUT PAGE
+════════════════════════ -->
+<div class="page-view" id="page-about">
+<div class="page">
+  <div class="about-hero">
+    <div class="fade-up">
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-ink-tertiary);margin-bottom:12px">About the Designer</div>
+      <h1>ABOUT<br><em>ME</em></h1>
+    </div>
+    <div class="about-intro fade-up" style="transition-delay:.1s">
+      <p>I'm <strong>Sammie Nguyen</strong>, a UX/UI Designer with a wide range of experience across social media, marketing, user &amp; competitor research, graphic design, and website development.</p>
+      <br>
+      <p>My goal is to widen my knowledge of Product Design to create software that is not only <strong>user-friendly</strong> but also fulfils stakeholders' requirements   bridging the gap between great experience and real business outcomes.</p>
+    </div>
+  </div>
+
+  <div class="about-stats fade-up">
+    <div class="stat-card">
+      <div class="num">7+</div>
+      <div class="lbl">Years Experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">4</div>
+      <div class="lbl">Companies</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">3</div>
+      <div class="lbl">Design Degrees</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">UX/UI</div>
+      <div class="lbl">Specialism</div>
+    </div>
+  </div>
+
+  <!-- Philosophy -->
+  <div style="margin-bottom:60px" class="fade-up">
+    <div class="about-section-title">Design Philosophy</div>
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="philosophy-num">01</div>
+        <div class="philosophy-title">User-Centred First</div>
+        <div class="philosophy-desc">Every design decision starts with the person using it. I research, test, and iterate to ensure the experience feels intuitive   not just visually polished.</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-num">02</div>
+        <div class="philosophy-title">Consistency Through Systems</div>
+        <div class="philosophy-desc">I believe in building scalable UI foundations   organised components, maintained libraries, and clear hierarchies that make entire products feel coherent.</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-num">03</div>
+        <div class="philosophy-title">Design &amp; Dev in Sync</div>
+        <div class="philosophy-desc">Great design lives in the product, not just the file. I work closely alongside developers to ensure designs translate accurately into the final experience.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience + Skills -->
+  <div class="about-grid">
+    <!-- Timeline -->
+    <div class="fade-up">
+      <div class="about-section-title">Experience</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">Present</div>
+          <div style="position:relative">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content" style="padding-left:24px">
+              <div class="timeline-role">UX/UI Designer</div>
+              <div class="timeline-company">Jonas Software Business Units</div>
+              <div class="timeline-desc">Built the design system from scratch, documented and maintained components, researched competitors, collaborated with developers on new features and core component updates, and communicated designs to stakeholders.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Part-time</div>
+          <div style="position:relative">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content" style="padding-left:24px">
+              <div class="timeline-role">UI Designer</div>
+              <div class="timeline-company">Destination Mars Project</div>
+              <div class="timeline-desc">Created and organised UI components, applying them consistently across product designs to build a cohesive visual system.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2019–<br>2022</div>
+          <div style="position:relative">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content" style="padding-left:24px">
+              <div class="timeline-role">UI Designer</div>
+              <div class="timeline-company">QED Software</div>
+              <div class="timeline-desc">Organised UI components and maintained the UI library, brainstormed solutions with the team, analysed competitors, and produced graphic design for brochures, presentations, and marketing infographics.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018</div>
+          <div style="position:relative">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content" style="padding-left:24px">
+              <div class="timeline-role">Graphic Designer</div>
+              <div class="timeline-company">NGT Vietnam</div>
+              <div class="timeline-desc">Analysed client briefs, brainstormed ideas for social campaigns, and worked directly with clients on key visuals for marketing and social media.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2016–<br>2017</div>
+          <div style="position:relative">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content" style="padding-left:24px">
+              <div class="timeline-role">Digital Content Writer</div>
+              <div class="timeline-company">Starseed Vietnam</div>
+              <div class="timeline-desc">Worked with clients on social plans, briefed the design team, and interviewed customers for social content resources.</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2016</div>
+          <div style="position:relative">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content" style="padding-left:24px">
+              <div class="timeline-role">Marketing Associate</div>
+              <div class="timeline-company">Grant Thornton Vietnam</div>
+              <div class="timeline-desc">Managed company website and intranet content, and designed publications for company events.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="fade-up" style="transition-delay:.1s">
+      <div class="about-section-title">Skills & Tools</div>
+      <div class="skills-grid">
+        <div class="skill-item"><div class="skill-icon">◎</div><div><div class="skill-name">UX / UI Design</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">⬡</div><div><div class="skill-name">Figma</div><div class="skill-type">Tool</div></div></div>
+        <div class="skill-item"><div class="skill-icon">◈</div><div><div class="skill-name">User Research</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">▦</div><div><div class="skill-name">Wireframing</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">❖</div><div><div class="skill-name">Graphic Design</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">◻</div><div><div class="skill-name">Prototyping</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">▲</div><div><div class="skill-name">Analysing</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">⬛</div><div><div class="skill-name">Photoshop / Illustrator</div><div class="skill-type">Tool</div></div></div>
+        <div class="skill-item"><div class="skill-icon">✦</div><div><div class="skill-name">Layout</div><div class="skill-type">Core</div></div></div>
+        <div class="skill-item"><div class="skill-icon">○</div><div><div class="skill-name">Teamwork</div><div class="skill-type">Soft Skill</div></div></div>
+      </div>
+
+      <!-- Education -->
+      <div style="margin-top:40px">
+        <div class="about-section-title" style="font-size:28px">Education</div>
+        <div style="background:var(--color-bg-surface);border:var(--border-width) solid var(--color-border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-1);margin-bottom:12px">
+          <div style="font-family:var(--font-ui);font-weight:800;font-size:16px;color:var(--color-ink)">UX/UI and Web Development</div>
+          <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--color-brand-blue);margin-bottom:4px">2019–2020</div>
+          <div style="font-size:13px;color:var(--color-ink-secondary)">Yoobee School of Design</div>
+        </div>
+        <div style="background:var(--color-bg-surface);border:var(--border-width) solid var(--color-border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-1);margin-bottom:12px">
+          <div style="font-family:var(--font-ui);font-weight:800;font-size:16px;color:var(--color-ink)">Web and Graphic Design</div>
+          <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--color-brand-blue);margin-bottom:4px">2018–2019</div>
+          <div style="font-size:13px;color:var(--color-ink-secondary)">Yoobee School of Design</div>
+        </div>
+        <div style="background:var(--color-bg-surface);border:var(--border-width) solid var(--color-border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-1)">
+          <div style="font-family:var(--font-ui);font-weight:800;font-size:16px;color:var(--color-ink)">International Business</div>
+          <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--color-brand-blue);margin-bottom:4px">2012–2016</div>
+          <div style="font-size:13px;color:var(--color-ink-secondary)">University of Economics and Law, Ho Chi Minh City, Vietnam</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="margin-bottom:60px" class="fade-up">
+    <div class="cv-section">
+      <div class="cv-bg-text">HELLO</div>
+      <div>
+        <div class="cv-kicker">Let's Connect</div>
+        <div class="cv-title">OPEN TO<br><em>NEW ROLES</em></div>
+        <p class="cv-desc">Available for senior IC, principal, and design leadership roles in product-led companies. Fully remote or based in Auckland.</p>
+      </div>
+      <div class="cv-actions">
+        <a class="btn-cv-primary" href="#" onclick="return false">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M3 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download CV
+        </a>
+        <a class="btn-cv-secondary" href="mailto:nhthuong23@gmail.com">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-copy">© 2024 Sammie Nguyen · All rights reserved</span>
+    <div class="footer-links">
+      <a class="footer-link" href="#">LinkedIn</a>
+      <a class="footer-link" href="#">Dribbble</a>
+      <a class="footer-link" href="#">Twitter</a>
+    </div>
+  </footer>
+</div>
+</div><!-- /page-about -->
+
+<script>
+/* ═══ NAVIGATION ═══ */
+function navigate(page) {
+  document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('nav-' + page).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Trigger fade-ups in new page
+  setTimeout(triggerFadeUps, 50);
+}
+
+/* ═══ THEME ═══ */
+let dark = false;
+function toggleTheme() {
+  dark = !dark;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('toggle-label').textContent = dark ? 'Dark' : 'Light';
+}
+
+/* ═══ MOBILE NAV ═══ */
+function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+/* ═══ WORK FILTER ═══ */
+function filterWork(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('#workGrid .work-card');
+  cards.forEach(c => {
+    if (cat === 'all' || c.dataset.cat === cat) {
+      c.style.display = 'flex';
+    } else {
+      c.style.display = 'none';
+    }
+  });
+}
+
+/* ═══ SCROLL ANIMATIONS ═══ */
+function triggerFadeUps() {
+  const activePage = document.querySelector('.page-view.active');
+  if (!activePage) return;
+  const els = activePage.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  els.forEach(el => { observer.observe(el); });
+}
+
+// Initial load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(triggerFadeUps, 100);
+});
+
+// Duplicate marquee for seamless scroll
+(function() {
+  const track = document.getElementById('marqueeTrack');
+  if (track) {
+    const clone = track.innerHTML;
+    track.innerHTML += clone;
+  }
+})();
+</script>
+</body>
+</html>
